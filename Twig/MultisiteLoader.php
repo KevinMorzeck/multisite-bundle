@@ -54,11 +54,11 @@ class MultisiteLoader extends \Twig_Loader_Filesystem
      */
     protected function findTemplate($name, $throw = true)
     {
-         $templates = $this->getTemplates($name);
+        $templates = $this->getTemplates($name);
          foreach ($templates as $template) {
-            try {
-                return $this->loader->findTemplate($template, $throw);
-            } catch (\Twig_Error $e) {}
+            if($existingTemplate = $this->loader->findTemplate($template, false)){
+                return $existingTemplate;
+            }
         }
         throw new \Twig_Error_Loader(sprintf("Template \"%s\" not found. Tried the following:\n%s", $name, implode("\n", $templates)));
     }
