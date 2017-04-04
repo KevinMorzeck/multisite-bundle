@@ -35,13 +35,13 @@ class MultisiteLoader extends \Twig_Loader_Filesystem
     /**
      * {@inheritdoc}
      */
-    public function getSource($name)
+    public function getSourceContext($name)
     {
         $templates = $this->getTemplates($name);
 
         foreach ($templates as $template) {
             try {
-                return $this->loader->getSource($template);
+                return $this->loader->getSourceContext($template);
             } catch (\Twig_Error $e) {
             }
         }
@@ -52,9 +52,9 @@ class MultisiteLoader extends \Twig_Loader_Filesystem
     /**
      * {@inheritdoc}
      */
-    protected function findTemplate($name)
+    protected function findTemplate($name, $throw = true)
     {
-        return $this->loader->findTemplate($name);
+        return $this->loader->findTemplate($name, $throw);
     }
 
 
