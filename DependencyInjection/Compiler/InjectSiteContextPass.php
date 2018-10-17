@@ -16,7 +16,7 @@ class InjectSiteContextPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->getDefinition('sensio_framework_extra.routing.loader.annot_class')->addMethodCall('setSiteContext', array(new Reference('site_context')));
+        $container->getDefinition('\Symfony\Bundle\FrameworkBundle\Routing\AnnotatedRouteControllerLoader')->addMethodCall('setSiteContext', array(new Reference('site_context')));
         $container->getDefinition('router.default')->setClass('Alex\MultisiteBundle\Router\MultisiteRouter');
         $container->getDefinition('router.default')->addMethodCall('setSiteContext', array(new Reference('site_context')));
         $container->getDefinition('router.default')->addMethodCall('setSortRoutes', array("%alex_multisite.sort_routes%"));
